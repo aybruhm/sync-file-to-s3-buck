@@ -18,19 +18,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_UPLOAD_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      - name: Upload llm_templates_info file artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: llm_info
-          path: ./s3/file.json
-
-      - name: Download llm_templates_info file artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: llm_info
-
       - name: Upload llm_templates_info to S3
-        run: aws s3 cp ./s3/file.json s3://${{ secrets.S3_BUCKET_NAME }}/llm_info.json
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: s3
+      - run: aws s3 cp s3/file.json s3://${{ secrets.S3_BUCKET_NAME }}/llm_info.json
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_UPLOAD_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_UPLOAD_SECRET_ACCESS_KEY }}
