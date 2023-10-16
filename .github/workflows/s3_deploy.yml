@@ -28,7 +28,7 @@ jobs:
       - name: Upload JSON to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --exclude "*" --include "s3/file.json"
+          args: --exclude "*" --include "/github/workspace/s3/file.json"
         env:
           SOURCE_DIR: "public"
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
