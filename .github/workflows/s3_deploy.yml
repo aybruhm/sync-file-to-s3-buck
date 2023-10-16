@@ -26,9 +26,10 @@ jobs:
       #     AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Upload JSON to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --exclude "*" --include "/github/workspace/s3/file.json"
+        # uses: jakejarvis/s3-sync-action@master
+        # with:
+        #   args: --exclude "*" --include "/github/workspace/s3/file.json"
+        run: ls -a
         env:
           SOURCE_DIR: "public"
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
